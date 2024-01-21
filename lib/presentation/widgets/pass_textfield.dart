@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lorby_neobis/core/consts/app_colors.dart';
 import 'package:lorby_neobis/core/consts/app_fonts.dart';
-import 'package:lorby_neobis/provider/btn_activity.dart';
 import 'package:lorby_neobis/provider/pass_visibility.dart';
 import 'package:provider/provider.dart';
 

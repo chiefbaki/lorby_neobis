@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lorby_neobis/core/consts/app_colors.dart';
 import 'package:lorby_neobis/core/consts/app_fonts.dart';
+import 'package:lorby_neobis/presentation/widgets/create_acc_btn.dart';
 import 'package:lorby_neobis/presentation/widgets/login_btn.dart';
 import 'package:lorby_neobis/presentation/widgets/login_textfield.dart';
 import 'package:lorby_neobis/presentation/widgets/pass_textfield.dart';
@@ -95,13 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 41.h,
               ),
-              TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "У меня еще нет аккаунта",
-                    style: AppFonts.s16w500.copyWith(color: Colors.black),
-                  )),
-              
+              const CreateAccBtn(),
             ],
           ),
         ),
