@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lorby_neobis/core/consts/app_colors.dart';
@@ -42,9 +41,9 @@ class LogOutBtn extends StatelessWidget {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(12))),
-                                    child: Padding(
+                                    child: const Padding(
                                       padding:
-                                          const EdgeInsets.symmetric(vertical: 13),
+                                          EdgeInsets.symmetric(vertical: 13),
                                       child: Text(
                                         "Да, точно",
                                         style: AppFonts.s16w500,

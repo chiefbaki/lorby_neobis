@@ -1,13 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:lorby_neobis/core/consts/app_colors.dart';
 import 'package:lorby_neobis/core/consts/app_fonts.dart';
-import 'package:lorby_neobis/presentation/router/app_router.gr.dart';
 // import 'package:lorby_neobis/provider/btn_activity.dart';
 // import 'package:provider/provider.dart';
 
 class LoginBtn extends StatefulWidget {
-  const LoginBtn({super.key});
+  final Function() onPressed;
+  const LoginBtn({super.key, required this.onPressed});
 
   @override
   State<LoginBtn> createState() => _LoginBtnState();
@@ -21,10 +20,7 @@ class _LoginBtnState extends State<LoginBtn> {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-          onPressed: () {
-            //vm.callErrorBlock();
-            context.router.push(const HomeRoute());
-          },
+          onPressed: widget.onPressed,
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black,
               disabledBackgroundColor: const Color.fromARGB(255, 199, 199, 199),

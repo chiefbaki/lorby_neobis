@@ -82,17 +82,18 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 28.h,
               ),
-              LoginTextField(controller: loginController),
+              LoginTextField(controller: loginController, hintText: "Введите логин",),
               SizedBox(
                 height: 14.h,
               ),
               PassTextField(
                 controller: passController,
+                hintText: "Введите пароль",
               ),
               SizedBox(
                 height: 24.h,
               ),
-              const LoginBtn(),
+              LoginBtn(onPressed: (){},),
               SizedBox(
                 height: 41.h,
               ),

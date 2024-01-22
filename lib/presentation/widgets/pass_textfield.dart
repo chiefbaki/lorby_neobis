@@ -6,10 +6,11 @@ import 'package:provider/provider.dart';
 
 class PassTextField extends StatefulWidget {
   final TextEditingController controller;
-
+  final String hintText;
   const PassTextField({
     super.key,
     required this.controller,
+    required this.hintText
   });
 
   @override
@@ -26,7 +27,7 @@ class _PassTextFieldState extends State<PassTextField> {
       controller: widget.controller,
       obscureText: vm.isVisible,
       decoration: InputDecoration(
-          hintText: "Введите пароль",
+          hintText: widget.hintText,
           hintStyle: AppFonts.s16w500.copyWith(color: AppColors.mediumDark),
           filled: true,
           fillColor: AppColors.textFieldColor,
