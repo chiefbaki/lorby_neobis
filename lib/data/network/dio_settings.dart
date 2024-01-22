@@ -29,12 +29,15 @@ class DioSettings {
       responseBody: true,
     );
 
-    final QueuedInterceptorsWrapper headerInterceptors = QueuedInterceptorsWrapper(
-      onRequest: (RequestOptions options, RequestInterceptorHandler handler) => handler.next(options),
+    final QueuedInterceptorsWrapper headerInterceptors =
+        QueuedInterceptorsWrapper(
+      onRequest: (RequestOptions options, RequestInterceptorHandler handler) =>
+          handler.next(options),
       onError: (DioException error, ErrorInterceptorHandler handler) {
         handler.next(error);
       },
-      onResponse: (Response response, ResponseInterceptorHandler handler) => handler.next(response),
+      onResponse: (Response response, ResponseInterceptorHandler handler) =>
+          handler.next(response),
     );
     interceptors.addAll([if (kDebugMode) logInterceptor, headerInterceptors]);
   }

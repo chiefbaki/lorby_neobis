@@ -1,14 +1,22 @@
-class RegisterModel{
-  final String? email;
-  final String? username;
-  final String? password;
-  final String? passwordConfirm;
-  
-  RegisterModel.toJson(this.email, this.username, this.password, this.passwordConfirm){
-    Map<String, dynamic> json = {};
+class RegisterModel {
+  String? email;
+  String? username;
+  String? password;
+  String? passwordConfirm;
+
+  RegisterModel(
+      {required this.email,
+      required this.username,
+      required this.password,
+      required this.passwordConfirm});
+
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = <String, dynamic>{};
     json["email"] = email;
     json["username"] = username;
     json["password"] = password;
-    json["passwordConfirm"] = passwordConfirm;
+    json["password_confirm"] = passwordConfirm;
+    return json;
   }
 }

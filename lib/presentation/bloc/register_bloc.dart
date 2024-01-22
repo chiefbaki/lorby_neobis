@@ -5,12 +5,14 @@ import 'package:lorby_neobis/repository/register_repository.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc({required this.repository}) : super(RegisterInitial()) {
-    on<RegisterEvent>((event, emit) {
+    on<UserRegisterEvent>((event, emit) {
       emit(RegisterLoading());
       try {
-         
+        var result = repository.postRegisterModel(
+            event.email, event.username, event.password, event.passwordConfirm);
+        emit(RegisterSuccess(result: result));
       } catch (e) {
-        print(e); 
+        emit(RegisterError(error: e.toString()));
       }
     });
   }
