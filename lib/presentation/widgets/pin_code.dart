@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lorby_neobis/core/consts/app_colors.dart';
 
 class PinCodeField extends StatelessWidget {
-  const PinCodeField({super.key});
+  final TextEditingController controller;
+  const PinCodeField({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class PinCodeField extends StatelessWidget {
           width: 56.w,
           height: 90.h,
           child: TextFormField(
+            controller: controller,
             cursorColor: Colors.black,
             cursorHeight: 10.w,
             onChanged: (value) {

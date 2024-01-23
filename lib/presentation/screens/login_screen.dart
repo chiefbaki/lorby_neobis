@@ -1,8 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lorby_neobis/core/consts/app_colors.dart';
 import 'package:lorby_neobis/core/consts/app_fonts.dart';
+import 'package:lorby_neobis/presentation/bloc/login_bloc/login_bloc.dart';
+import 'package:lorby_neobis/presentation/bloc/login_bloc/login_event.dart';
+import 'package:lorby_neobis/presentation/router/app_router.gr.dart';
 import 'package:lorby_neobis/presentation/widgets/create_acc_btn.dart';
 import 'package:lorby_neobis/presentation/widgets/login_btn.dart';
 import 'package:lorby_neobis/presentation/widgets/login_textfield.dart';
@@ -102,7 +106,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 24.h,
               ),
               LoginBtn(
-                onPressed: () {},
+                onPressed: () {
+                  BlocProvider.of<LoginBloc>(context).add(MakeLoginEvent(
+                      username: loginController.text,
+                      password: passController.text));
+                  context.router.push(const HomeRoute());
+                },
               ),
               SizedBox(
                 height: 41.h,
