@@ -7,7 +7,6 @@ class AppRouter extends $AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           page: SplashRoute.page,
-          initial: true,
         ),
         AutoRoute(
           page: LoginRoute.page,
@@ -17,9 +16,11 @@ class AppRouter extends $AppRouter {
         ),
         AutoRoute(
           page: SignUpRoute.page,
+          
         ),
         AutoRoute(
           page: EmailConfirmRoute.page,
+          initial: true,
         ),
       ];
 }

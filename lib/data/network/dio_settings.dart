@@ -35,6 +35,7 @@ class DioSettings {
           handler.next(options),
       onError: (DioException error, ErrorInterceptorHandler handler) {
         handler.next(error);
+        
       },
       onResponse: (Response response, ResponseInterceptorHandler handler) =>
           handler.next(response),

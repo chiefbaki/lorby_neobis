@@ -12,7 +12,6 @@ import 'package:lorby_neobis/presentation/widgets/login_btn.dart';
 import 'package:lorby_neobis/presentation/widgets/login_textfield.dart';
 import 'package:lorby_neobis/presentation/widgets/pass_textfield.dart';
 
-import '../bloc/register_bloc/register_state.dart';
 
 @RoutePage()
 class SignUpScreen extends StatefulWidget {
@@ -51,12 +50,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       body: Center(
           child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: BlocBuilder<RegisterBloc, RegisterState>(
-          builder: (context, state) {
-            bool isEnabled = state is RegisterSuccess;
-            if (state is RegisterSuccess) {
-              return Column(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
@@ -107,30 +102,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 24.h,
                   ),
                   LoginBtn(
-                      onPressed: isEnabled
-                          ? () {
-                              BlocProvider.of<RegisterBloc>(context).add(
-                                  UserRegisterEvent(
-                                      email: emailController.text,
-                                      username: usernameController.text,
-                                      password: passwordController.text,
-                                      passwordConfirm:
-                                          passwordConfirmController.text));
-                              context.router.push(const EmailConfirmRoute());
-                            }
-                          // ignore: cast_from_null_always_fails
-                          : null as void Function()),
+                      // ignore: unnecessary_type_check
+                      onPressed: () {
+                    BlocProvider.of<RegisterBloc>(context).add(
+                        UserRegisterEvent(
+                            email: emailController.text,
+                            username: usernameController.text,
+                            password: passwordController.text,
+                            passwordConfirm: passwordConfirmController.text));
+                    context.router.push(const EmailConfirmRoute());
+                  }
+                      // ignore: cast_from_null_always_fails
+                      )
                 ],
-              );
-            } else if (state is RegisterError) {
-              return Center(
-                child: Text(state.error),
-              );
-            }
-            return const SizedBox();
-          },
-        ),
-      )),
+              ))),
     );
   }
 }
