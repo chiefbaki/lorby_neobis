@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class PassVisibilityProvider extends ChangeNotifier{
   bool isVisible = true;
+  
   void changeVisibility(){
     isVisible = !isVisible;
     notifyListeners();

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lorby_neobis/presentation/bloc/register_bloc.dart';
+import 'package:lorby_neobis/presentation/bloc/email_confirm_bloc/email_confirm_bloc.dart';
+import 'package:lorby_neobis/presentation/bloc/register_bloc/register_bloc.dart';
 import 'package:lorby_neobis/presentation/router/app_router.dart';
 import 'package:lorby_neobis/provider/btn_activity.dart';
 import 'package:lorby_neobis/provider/pass_visibility.dart';
@@ -18,8 +19,19 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return RepositoryProvider(
             create: (context) => RegisterRepository(),
-            child: BlocProvider(
-              create: (context) => RegisterBloc(repository: RepositoryProvider.of<RegisterRepository>(context)),
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => RegisterBloc(
+                      repository:
+                          RepositoryProvider.of<RegisterRepository>(context)),
+                ),
+                BlocProvider(
+                  create: (context) => EmailConfirmBloc(
+                      repository:
+                          RepositoryProvider.of<RegisterRepository>(context)),
+                ),
+              ],
               child: MultiProvider(
                 providers: [
                   ChangeNotifierProvider(
