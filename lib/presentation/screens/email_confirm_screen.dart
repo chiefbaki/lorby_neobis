@@ -6,8 +6,10 @@ import 'package:lorby_neobis/core/consts/app_colors.dart';
 import 'package:lorby_neobis/core/consts/app_fonts.dart';
 import 'package:lorby_neobis/presentation/bloc/email_confirm_bloc/email_confirm_bloc.dart';
 import 'package:lorby_neobis/presentation/bloc/email_confirm_bloc/email_confirm_event.dart';
+import 'package:lorby_neobis/presentation/router/app_router.gr.dart';
 import 'package:lorby_neobis/presentation/widgets/login_btn.dart';
 import 'package:lorby_neobis/presentation/widgets/pin_code.dart';
+
 
 @RoutePage()
 class EmailConfirmScreen extends StatefulWidget {
@@ -87,6 +89,7 @@ class _EmailConfirmScreenState extends State<EmailConfirmScreen> {
                         controller2.text +
                         controller3.text +
                         controller4.text));
+                context.router.push(const HomeRoute());
                 // print(controller1.text+controller2.text+controller3.text+controller4.text);
               }),
             ],

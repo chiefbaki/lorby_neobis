@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:lorby_neobis/data/model/email_confirm_model.dart';
 import 'package:lorby_neobis/data/model/login_model.dart';
 import 'package:lorby_neobis/data/model/register_model.dart';
+import 'package:lorby_neobis/data/model/token_model.dart';
 import 'package:lorby_neobis/data/network/dio_settings.dart';
 
 class RegisterRepository {
@@ -23,9 +24,11 @@ class RegisterRepository {
         data: EmailConfirm(code: code).toJson());
   }
 
-  Future<dynamic> postLogin(String username, String password) async {
-    final Response response = await _dio.post("https://neobook.online/lorby/authentication/login/",
+  Future<TokenModel> postLogin(String username, String password) async {
+   final Response response = await _dio.post("https://neobook.online/lorby/authentication/login/",
         data: LoginModel(username: username, password: password).toJson());
-    return response.data;
+
+        return TokenModel.fromJson(response.data);
+    
   }
 }

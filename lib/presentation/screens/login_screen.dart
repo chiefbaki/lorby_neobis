@@ -6,6 +6,7 @@ import 'package:lorby_neobis/core/consts/app_colors.dart';
 import 'package:lorby_neobis/core/consts/app_fonts.dart';
 import 'package:lorby_neobis/presentation/bloc/login_bloc/login_bloc.dart';
 import 'package:lorby_neobis/presentation/bloc/login_bloc/login_event.dart';
+import 'package:lorby_neobis/presentation/bloc/login_bloc/login_state.dart';
 import 'package:lorby_neobis/presentation/router/app_router.gr.dart';
 import 'package:lorby_neobis/presentation/widgets/create_acc_btn.dart';
 import 'package:lorby_neobis/presentation/widgets/login_btn.dart';
@@ -33,94 +34,99 @@ class _LoginScreenState extends State<LoginScreen> {
     final vm = Provider.of<ButtonActivity>(context);
     return Scaffold(
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 68.h,
-              ),
-              Stack(
+          child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
                 children: [
-                  Center(
-                    child: Image.asset(
-                      Images.earth,
-                      width: 186.w,
-                      height: 194.h,
-                    ),
+                  SizedBox(
+                    height: 68.h,
                   ),
-                  Positioned(
-                      child: Visibility(
-                    visible: vm.isVisibleErrorBlock,
-                    child: Container(
-                      width: 343.w,
-                      height: 54.h,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: AppColors.errorColor),
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Неверный логин или пароль",
-                              style: AppFonts.s16w500
-                                  .copyWith(color: AppColors.errorColor),
-                            ),
-                          ],
+                  Stack(
+                    children: [
+                      Center(
+                        child: Image.asset(
+                          Images.earth,
+                          width: 186.w,
+                          height: 194.h,
                         ),
                       ),
+                      Positioned(
+                          child: Visibility(
+                        visible: vm.isVisibleErrorBlock,
+                        child: Container(
+                          width: 343.w,
+                          height: 54.h,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: AppColors.errorColor),
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Неверный логин или пароль",
+                                  style: AppFonts.s16w500
+                                      .copyWith(color: AppColors.errorColor),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 35.h,
+                  ),
+                  const Text(
+                    "Вэлком бэк!",
+                    style: AppFonts.s24w500,
+                  ),
+                  SizedBox(
+                    height: 28.h,
+                  ),
+                  LoginTextField(
+                    controller: loginController,
+                    hintText: "Введите логин",
+                  ),
+                  SizedBox(
+                    height: 14.h,
+                  ),
+                  PassTextField(
+                    controller: passController,
+                    hintText: "Введите пароль",
+                    isVisible: false,
+                    onPressed: () {
+                      isVisible = !isVisible;
+                      setState(() {});
+                    },
+                  ),
+                  SizedBox(
+                    height: 24.h,
+                  ),
+                  BlocListener<LoginBloc, LoginState>(
+                    listener: (context, state) {
+                      if (state is LoginSuccess) {
+                        context.router.push(const HomeRoute());
+                      }
+                    },
+                    child: LoginBtn(
+                      onPressed: () async {
+                        var bloc = BlocProvider.of<LoginBloc>(context);
+                        bloc.add(MakeLoginEvent(
+                            username: loginController.text,
+                            password: passController.text));
+                      },
                     ),
-                  ))
+                  ),
+                  SizedBox(
+                    height: 41.h,
+                  ),
+                  const CreateAccBtn(),
                 ],
-              ),
-              SizedBox(
-                height: 35.h,
-              ),
-              const Text(
-                "Вэлком бэк!",
-                style: AppFonts.s24w500,
-              ),
-              SizedBox(
-                height: 28.h,
-              ),
-              LoginTextField(
-                controller: loginController,
-                hintText: "Введите логин",
-              ),
-              SizedBox(
-                height: 14.h,
-              ),
-              PassTextField(
-                controller: passController,
-                hintText: "Введите пароль",
-                isVisible: false,
-                onPressed: () {
-                  isVisible = !isVisible;
-                  setState(() {});
-                },
-              ),
-              SizedBox(
-                height: 24.h,
-              ),
-              LoginBtn(
-                onPressed: () {
-                  BlocProvider.of<LoginBloc>(context).add(MakeLoginEvent(
-                      username: loginController.text,
-                      password: passController.text));
-                  context.router.push(const HomeRoute());
-                },
-              ),
-              SizedBox(
-                height: 41.h,
-              ),
-              const CreateAccBtn(),
-            ],
-          ),
-        ),
-      ),
+              ))),
     );
   }
 }
