@@ -19,6 +19,7 @@ class DioSettings {
     ),
   );
 
+
   Future<void> setup() async {
     final Interceptors interceptors = dio.interceptors;
 
@@ -35,7 +36,7 @@ class DioSettings {
           handler.next(options),
       onError: (DioException error, ErrorInterceptorHandler handler) {
         handler.next(error);
-        
+
       },
       onResponse: (Response response, ResponseInterceptorHandler handler) =>
           handler.next(response),

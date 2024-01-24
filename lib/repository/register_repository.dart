@@ -23,8 +23,9 @@ class RegisterRepository {
         data: EmailConfirm(code: code).toJson());
   }
 
-  Future<void> postLogin(String username, String password) async {
-    await _dio.post("https://neobook.online/lorby/authentication/login/",
+  Future<dynamic> postLogin(String username, String password) async {
+    final Response response = await _dio.post("https://neobook.online/lorby/authentication/login/",
         data: LoginModel(username: username, password: password).toJson());
+    return response.data;
   }
 }

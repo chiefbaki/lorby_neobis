@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lorby_neobis/presentation/bloc/email_confirm_bloc/email_confirm_event.dart';
 import 'package:lorby_neobis/presentation/bloc/email_confirm_bloc/email_confirm_state.dart';
@@ -10,7 +11,9 @@ class EmailConfirmBloc extends Bloc<EmailConfirmEvent, EmailConfirmState> {
         var result = repository.postEmailConfirm(event.confirmationCode);
         emit(EmailConfirmSuccess(code: result));
       } catch (e) {
-        emit(EmailConfirmError(error: e.toString()));
+        if (e is DioException) {
+          emit(EmailConfirmError(error: e.toString()));
+        }
       }
     });
   }

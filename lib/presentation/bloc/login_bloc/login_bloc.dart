@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lorby_neobis/presentation/bloc/login_bloc/login_event.dart';
 import 'package:lorby_neobis/presentation/bloc/login_bloc/login_state.dart';
@@ -8,9 +9,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<MakeLoginEvent>((event, emit) {
       emit(LoginLoading());
       try {
-         repository.postLogin(event.username, event.password);
+         dynamic res = repository.postLogin(event.username, event.password);
+         emit(LoginSuccess(token: res));
       } catch (e) {
-        emit(LoginError(error: e.toString()));
+        if (e is DioException) {
+          emit(LoginError(error: e.toString()));
+        }
       }
     });
   }

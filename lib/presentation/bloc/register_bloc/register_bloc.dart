@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lorby_neobis/presentation/bloc/register_bloc/register_event.dart';
 import 'package:lorby_neobis/presentation/bloc/register_bloc/register_state.dart';
@@ -12,7 +13,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             event.email, event.username, event.password, event.passwordConfirm);
         emit(RegisterSuccess());
       } catch (e) {
-        emit(RegisterError(error: e.toString()));
+        if (e is DioException) {
+          emit(RegisterError(error: e.toString()));
+        }
       }
     });
   }

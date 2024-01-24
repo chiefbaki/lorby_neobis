@@ -50,12 +50,12 @@ class LogOutBtn extends StatelessWidget {
                                       ),
                                     )),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               ElevatedButton(
                                   onPressed: () {},
-                                  child: Text(
+                                  child: const Text(
                                     "Да, точно",
                                     style: AppFonts.s16w500,
                                   )),
