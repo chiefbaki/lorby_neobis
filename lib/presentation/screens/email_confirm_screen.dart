@@ -9,6 +9,8 @@ import 'package:lorby_neobis/presentation/bloc/email_confirm_bloc/email_confirm_
 import 'package:lorby_neobis/presentation/router/app_router.gr.dart';
 import 'package:lorby_neobis/presentation/widgets/login_btn.dart';
 import 'package:lorby_neobis/presentation/widgets/pin_code.dart';
+import 'package:lorby_neobis/provider/btn_activity.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class EmailConfirmScreen extends StatefulWidget {
@@ -50,12 +52,21 @@ class _EmailConfirmScreenState extends State<EmailConfirmScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "Введи 4-значный код, высланный на\nexample@gmail.com",
-                      style: AppFonts.s20w500,
-                      textAlign: TextAlign.center,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FutureProvider(
+                      create: (context) =>
+                          Provider.of<ButtonActivity>(context, listen: false).getPrefsData(),
+                      initialData: "Loading...",
+                      child: Consumer<String>(
+                        builder: (context, value, child) {
+                          return Text(
+                            "Введи 4-значный код, высланный на\n$value",
+                            style: AppFonts.s20w500,
+                            textAlign: TextAlign.center,
+                          );
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -101,8 +112,6 @@ class _EmailConfirmScreenState extends State<EmailConfirmScreen> {
                                   controller2.text +
                                   controller3.text +
                                   controller4.text));
-
-                      // print(controller1.text+controller2.text+controller3.text+controller4.text);
                     }),
                   ),
                 ],

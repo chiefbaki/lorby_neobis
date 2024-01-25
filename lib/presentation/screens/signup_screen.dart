@@ -11,6 +11,8 @@ import 'package:lorby_neobis/presentation/screens/login_screen.dart';
 import 'package:lorby_neobis/presentation/widgets/login_btn.dart';
 import 'package:lorby_neobis/presentation/widgets/login_textfield.dart';
 import 'package:lorby_neobis/presentation/widgets/pass_textfield.dart';
+import 'package:lorby_neobis/provider/btn_activity.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class SignUpScreen extends StatefulWidget {
@@ -109,7 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           debugPrint(state.error);
                         }
                       },
-                      child: LoginBtn(onPressed: () {
+                      child: LoginBtn(onPressed: () async {
                         BlocProvider.of<RegisterBloc>(context).add(
                             UserRegisterEvent(
                                 email: emailController.text,
@@ -117,9 +119,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 password: passwordController.text,
                                 passwordConfirm:
                                     passwordConfirmController.text));
-                      }
-                          // ignore: cast_from_null_always_fails
-                          ),
+                        Provider.of<ButtonActivity>(context, listen: false)
+                            .setEmail(email: emailController.text);
+                      }),
                     )
                   ],
                 ))),
