@@ -7,13 +7,13 @@ import 'package:lorby_neobis/repository/register_repository.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({required this.repository}) : super(LoginInitial()) {
-    on<MakeLoginEvent>((event, emit)async {
+    on<MakeLoginEvent>((event, emit) async {
       emit(LoginLoading());
       try {
-        
-         TokenModel res = await repository.postLogin(event.username, event.password);
-         
-         emit(LoginSuccess(token: res));
+        TokenModel res =
+            await repository.postLogin(event.username, event.password);
+
+        emit(LoginSuccess(token: res));
       } catch (e) {
         if (e is DioException) {
           emit(LoginError(error: e.toString()));
@@ -22,7 +22,4 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
   }
   final RegisterRepository repository;
-  // bool isValidate(String username, String password){
-
-  // }
 }

@@ -1,5 +1,4 @@
 import "dart:async";
-
 import "package:dio/dio.dart";
 import "package:flutter/foundation.dart";
 
@@ -19,7 +18,6 @@ class DioSettings {
     ),
   );
 
-
   Future<void> setup() async {
     final Interceptors interceptors = dio.interceptors;
 
@@ -32,15 +30,17 @@ class DioSettings {
 
     final QueuedInterceptorsWrapper headerInterceptors =
         QueuedInterceptorsWrapper(
-      onRequest: (RequestOptions options, RequestInterceptorHandler handler) =>
-          handler.next(options),
-      onError: (DioException error, ErrorInterceptorHandler handler) {
-        handler.next(error);
-
-      },
-      onResponse: (Response response, ResponseInterceptorHandler handler) =>
-          handler.next(response),
-    );
+            onRequest:
+                (RequestOptions options, RequestInterceptorHandler handler) =>
+                    handler.next(options),
+            onError: (DioException error, ErrorInterceptorHandler handler) {
+              handler.next(error);
+              
+            },
+            onResponse:
+                (Response response, ResponseInterceptorHandler handler) {
+              handler.next(response);
+            });
     interceptors.addAll([if (kDebugMode) logInterceptor, headerInterceptors]);
   }
 }

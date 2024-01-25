@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lorby_neobis/core/consts/app_colors.dart';
 
 class PinCodeField extends StatelessWidget {
@@ -11,16 +10,16 @@ class PinCodeField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       child: SizedBox(
-          width: 56.w,
-          height: 90.h,
+          width: 56,
+          height: 90,
           child: TextFormField(
             controller: controller,
             cursorColor: Colors.black,
-            cursorHeight: 10.w,
+            cursorHeight: 10,
             onChanged: (value) {
               if (value.length == 1) {
                 FocusScope.of(context).nextFocus();
-                print(value.length);
+                debugPrint(value.length.toString());
               }
             },
             inputFormatters: [

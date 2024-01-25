@@ -1,10 +1,10 @@
 class RefreshTokenModel{
-  String? accessToken;
-  RefreshTokenModel({required this.accessToken});
+ String? tokenRefresh;
+  RefreshTokenModel({required this.tokenRefresh});
 
   Map<String, dynamic> toJson(){
     Map<String, dynamic> json = <String, dynamic>{};
-    json["refresh"] = accessToken;
+    json["refresh"] = tokenRefresh;
     return json;
   }
 }

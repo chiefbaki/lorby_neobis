@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lorby_neobis/core/consts/app_colors.dart';
 import 'package:lorby_neobis/core/consts/app_fonts.dart';
-// import 'package:lorby_neobis/provider/btn_activity.dart';
-// import 'package:provider/provider.dart';
 
 class LoginBtn extends StatefulWidget {
   final Function() onPressed;
@@ -16,7 +14,6 @@ class _LoginBtnState extends State<LoginBtn> {
   bool isVisible = false;
   @override
   Widget build(BuildContext context) {
-    // final vm = Provider.of<ButtonActivity>(context);
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(

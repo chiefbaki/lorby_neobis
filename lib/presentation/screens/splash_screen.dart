@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lorby_neobis/core/consts/app_fonts.dart';
 import 'package:lorby_neobis/presentation/router/app_router.gr.dart';
 import 'package:lorby_neobis/resources/resources.dart';
@@ -39,15 +38,15 @@ class _SplashScreenState extends State<SplashScreen> {
               "Lorby",
               style: AppFonts.s40w500,
             ),
-            SizedBox(
-              height: 8.h,
+            const SizedBox(
+              height: 8,
             ),
             const Text(
               "Твой личный репетитор",
               style: AppFonts.s20w400,
             ),
-            SizedBox(
-              height: 66.h,
+            const SizedBox(
+              height: 66,
             ),
             Image.asset(Images.illustration),
             const Spacer()
