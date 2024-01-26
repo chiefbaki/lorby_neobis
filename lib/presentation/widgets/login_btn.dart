@@ -4,7 +4,8 @@ import 'package:lorby_neobis/core/consts/app_fonts.dart';
 
 class LoginBtn extends StatefulWidget {
   final Function() onPressed;
-  const LoginBtn({super.key, required this.onPressed});
+  final String title;
+  const LoginBtn({super.key, required this.onPressed, required this.title});
 
   @override
   State<LoginBtn> createState() => _LoginBtnState();
@@ -26,7 +27,7 @@ class _LoginBtnState extends State<LoginBtn> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 17),
             child: Text(
-              "Войти",
+              widget.title,
               style: AppFonts.s16w500.copyWith(color: AppColors.mediumDark),
             ),
           )),

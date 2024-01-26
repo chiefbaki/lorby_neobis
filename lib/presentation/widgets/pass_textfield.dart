@@ -33,7 +33,7 @@ class _PassTextFieldState extends State<PassTextField> {
             onPressed: widget.onPressed,
             icon: Icon(widget.isVisible
                 ? Icons.visibility_off
-                : Icons.visibility_sharp),
+                : Icons.visibility_sharp, color: AppColors.mediumDark,),
           ),
           enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: AppColors.textFieldColor),

@@ -6,4 +6,6 @@ abstract class AppColors{
   static const Color errorColor = Color(0xffEC0000);
   static const Color timerColor = Color(0xff595959);
   static const Color black = Colors.black;
+  static const Color successColor = Color(0xff1BA228);
+  static const Color disabledBtnColor = Color(0xffD7D7D7);
 }

@@ -21,12 +21,21 @@ class EmailConfirmScreen extends StatefulWidget {
 }
 
 class _EmailConfirmScreenState extends State<EmailConfirmScreen> {
+  final TextEditingController controller1 = TextEditingController();
+  final TextEditingController controller2 = TextEditingController();
+  final TextEditingController controller3 = TextEditingController();
+  final TextEditingController controller4 = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+    controller1.dispose();
+    controller2.dispose();
+    controller3.dispose();
+    controller4.dispose();
+  }
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller1 = TextEditingController();
-    final TextEditingController controller2 = TextEditingController();
-    final TextEditingController controller3 = TextEditingController();
-    final TextEditingController controller4 = TextEditingController();
+    final vm = Provider.of<ButtonActivity>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -36,7 +45,9 @@ class _EmailConfirmScreenState extends State<EmailConfirmScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.popRoute();
+            },
             icon: const Icon(
               Icons.arrow_back_ios,
               color: AppColors.black,
@@ -47,16 +58,16 @@ class _EmailConfirmScreenState extends State<EmailConfirmScreen> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 58, vertical: 60),
             child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.4,
+              height: MediaQuery.of(context).size.height * 0.54,
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: FutureProvider(
                       create: (context) =>
-                          Provider.of<ButtonActivity>(context, listen: false).getPrefsData(),
+                          Provider.of<ButtonActivity>(context, listen: false)
+                              .getPrefsData(),
                       initialData: "Loading...",
                       child: Consumer<String>(
                         builder: (context, value, child) {
@@ -89,7 +100,19 @@ class _EmailConfirmScreenState extends State<EmailConfirmScreen> {
                       ),
                     ],
                   ),
-                  const Spacer(),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Visibility(
+                      visible: !vm.isErrorPinCode,
+                      child: Text(
+                        "Неверный код",
+                        style: AppFonts.s14w500
+                            .copyWith(color: AppColors.errorColor),
+                      )),
+                  const SizedBox(
+                    height: 14,
+                  ),
                   Text(
                     "Выслать код еще раз через 0:54",
                     style:
@@ -103,16 +126,21 @@ class _EmailConfirmScreenState extends State<EmailConfirmScreen> {
                       if (state is EmailConfirmSuccess) {
                         context.router.push(const HomeRoute());
                         debugPrint(state.message.toString());
+                      } else if (state is EmailConfirmError) {
+                        vm.changePinCodeBorder();
                       }
                     },
-                    child: LoginBtn(onPressed: () {
-                      BlocProvider.of<EmailConfirmBloc>(context).add(
-                          MakeEmailConfirm(
-                              confirmationCode: controller1.text +
-                                  controller2.text +
-                                  controller3.text +
-                                  controller4.text));
-                    }),
+                    child: LoginBtn(
+                      onPressed: () {
+                        BlocProvider.of<EmailConfirmBloc>(context).add(
+                            MakeEmailConfirm(
+                                confirmationCode: controller1.text +
+                                    controller2.text +
+                                    controller3.text +
+                                    controller4.text));
+                      },
+                      title: "Подтвердить",
+                    ),
                   ),
                 ],
               ),

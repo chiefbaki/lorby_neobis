@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lorby_neobis/core/consts/app_colors.dart';
+import 'package:lorby_neobis/provider/btn_activity.dart';
+import 'package:provider/provider.dart';
 
 class PinCodeField extends StatelessWidget {
   final TextEditingController controller;
@@ -8,6 +10,7 @@ class PinCodeField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<ButtonActivity>(context);
     return Form(
       child: SizedBox(
           width: 56,
@@ -32,7 +35,7 @@ class PinCodeField extends StatelessWidget {
                 fillColor: AppColors.textFieldColor,
                 enabledBorder: OutlineInputBorder(
                     borderSide:
-                        const BorderSide(color: AppColors.textFieldColor),
+                        BorderSide(color:vm.setPinCodeBorder()),
                     borderRadius: BorderRadius.circular(12)),
                 focusedBorder: OutlineInputBorder(
                     borderSide:

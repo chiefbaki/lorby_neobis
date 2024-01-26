@@ -7,7 +7,6 @@ import 'package:lorby_neobis/presentation/bloc/register_bloc/register_bloc.dart'
 import 'package:lorby_neobis/presentation/bloc/register_bloc/register_event.dart';
 import 'package:lorby_neobis/presentation/bloc/register_bloc/register_state.dart';
 import 'package:lorby_neobis/presentation/router/app_router.gr.dart';
-import 'package:lorby_neobis/presentation/screens/login_screen.dart';
 import 'package:lorby_neobis/presentation/widgets/login_btn.dart';
 import 'package:lorby_neobis/presentation/widgets/login_textfield.dart';
 import 'package:lorby_neobis/presentation/widgets/pass_textfield.dart';
@@ -22,17 +21,17 @@ class SignUpScreen extends StatefulWidget {
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
-  void changeVisibility() {
-    isVisible = !isVisible;
-  }
+bool isVisible1 = true;
+bool isVisible2 = true;
 
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
     TextEditingController usernameController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     TextEditingController passwordConfirmController = TextEditingController();
+  final vm = Provider.of<ButtonActivity>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -42,7 +41,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.popRoute();
+            },
             icon: const Icon(
               Icons.arrow_back_ios,
               color: AppColors.black,
@@ -81,15 +82,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     PassTextField(
                         controller: passwordController,
                         hintText: "Создай пароль",
-                        isVisible: false,
-                        onPressed: changeVisibility),
+                        isVisible: isVisible1,
+                        onPressed: () {
+                          isVisible1 = !isVisible1;
+                          setState(() {});
+                        }),
                     const SizedBox(
                       height: 6,
                     ),
-                    Container(
+                    SizedBox(
                       height: 80,
                       width: 235,
-                      decoration: const BoxDecoration(color: Colors.red),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("·  От 8 до 15 символов", style: AppFonts.s12w500.copyWith(color: vm.setColorOne(passwordController.text)),),
+                          Text("·  Строчные и прописные буквы", style: AppFonts.s12w500.copyWith(color: AppColors.mediumDark),),
+                          Text("·  Минимум 1 цифра", style: AppFonts.s12w500.copyWith(color: AppColors.mediumDark),),
+                          Text('·  Минимум 1 спецсимвол (!, ", #, \$...)', style: AppFonts.s12w500.copyWith(color: AppColors.mediumDark),),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 14,
@@ -97,8 +109,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     PassTextField(
                         controller: passwordConfirmController,
                         hintText: "Повтори пароль",
-                        isVisible: false,
-                        onPressed: changeVisibility),
+                        isVisible: isVisible2,
+                        onPressed: () {
+                          isVisible2 = !isVisible2;
+                          setState(() {});
+                        }),
                     const SizedBox(
                       height: 24,
                     ),
@@ -111,17 +126,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           debugPrint(state.error);
                         }
                       },
-                      child: LoginBtn(onPressed: () async {
-                        BlocProvider.of<RegisterBloc>(context).add(
-                            UserRegisterEvent(
-                                email: emailController.text,
-                                username: usernameController.text,
-                                password: passwordController.text,
-                                passwordConfirm:
-                                    passwordConfirmController.text));
-                        Provider.of<ButtonActivity>(context, listen: false)
-                            .setEmail(email: emailController.text);
-                      }),
+                      child: LoginBtn(
+                        onPressed: () async {
+                          BlocProvider.of<RegisterBloc>(context).add(
+                              UserRegisterEvent(
+                                  email: emailController.text,
+                                  username: usernameController.text,
+                                  password: passwordController.text,
+                                  passwordConfirm:
+                                      passwordConfirmController.text));
+                          Provider.of<ButtonActivity>(context, listen: false)
+                              .setEmail(email: emailController.text);
+                        },
+                        title: "Войти",
+                      ),
                     )
                   ],
                 ))),

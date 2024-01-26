@@ -14,27 +14,30 @@ import 'package:lorby_neobis/presentation/widgets/login_textfield.dart';
 import 'package:lorby_neobis/presentation/widgets/pass_textfield.dart';
 import 'package:lorby_neobis/resources/resources.dart';
 
+
 @RoutePage()
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({
+    super.key,
+  });
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-bool isVisible = false;
+bool isVisible = true;
 bool isVisibleErrorBlock = false;
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController loginController = TextEditingController();
   final TextEditingController passController = TextEditingController();
-@override
+  @override
   void dispose() {
-    
     super.dispose();
     loginController.dispose();
     passController.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,9 +106,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     PassTextField(
                       controller: passController,
                       hintText: "Введите пароль",
-                      isVisible: false,
+                      isVisible: isVisible,
                       onPressed: () {
                         isVisible = !isVisible;
+                        setState(() {});
                       },
                     ),
                     const SizedBox(
@@ -116,6 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (state is LoginSuccess) {
                           context.router.replace(const HomeRoute());
                           debugPrint(state.token.refresh);
+                          debugPrint(state.token.access);
                         } else if (state is LoginError) {
                           isVisibleErrorBlock = !isVisibleErrorBlock;
                           Timer(const Duration(seconds: 5), () {
@@ -131,7 +136,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           bloc.add(MakeLoginEvent(
                               username: loginController.text,
                               password: passController.text));
+                          loginController.clear();
+                          passController.clear();
                         },
+                        title: "Войти",
                       ),
                     ),
                     const SizedBox(
