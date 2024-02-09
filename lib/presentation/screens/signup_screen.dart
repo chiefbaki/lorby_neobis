@@ -10,7 +10,7 @@ import 'package:lorby_neobis/presentation/router/app_router.gr.dart';
 import 'package:lorby_neobis/presentation/widgets/login_btn.dart';
 import 'package:lorby_neobis/presentation/widgets/login_textfield.dart';
 import 'package:lorby_neobis/presentation/widgets/pass_textfield.dart';
-import 'package:lorby_neobis/provider/btn_activity.dart';
+import 'package:lorby_neobis/presentation/provider/btn_activity.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -90,19 +90,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(
                       height: 6,
                     ),
-                    SizedBox(
-                      height: 80,
-                      width: 235,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("·  От 8 до 15 символов", style: AppFonts.s12w500.copyWith(color: vm.setColorOne(passwordController.text)),),
-                          Text("·  Строчные и прописные буквы", style: AppFonts.s12w500.copyWith(color: AppColors.mediumDark),),
-                          Text("·  Минимум 1 цифра", style: AppFonts.s12w500.copyWith(color: AppColors.mediumDark),),
-                          Text('·  Минимум 1 спецсимвол (!, ", #, \$...)', style: AppFonts.s12w500.copyWith(color: AppColors.mediumDark),),
-                        ],
-                      ),
-                    ),
+                    // SizedBox(
+                    //   height: 80,
+                    //   width: 235,
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       Text("·  От 8 до 15 символов", style: AppFonts.s12w500.copyWith(color: vm.setColorOne(passwordController.text)),),
+                    //       Text("·  Строчные и прописные буквы", style: AppFonts.s12w500.copyWith(color: AppColors.mediumDark),),
+                    //       Text("·  Минимум 1 цифра", style: AppFonts.s12w500.copyWith(color: AppColors.mediumDark),),
+                    //       Text('·  Минимум 1 спецсимвол (!, ", #, \$...)', style: AppFonts.s12w500.copyWith(color: AppColors.mediumDark),),
+                    //     ],
+                    //   ),
+                    // ),
                     const SizedBox(
                       height: 14,
                     ),

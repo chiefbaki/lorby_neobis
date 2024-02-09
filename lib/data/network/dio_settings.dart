@@ -27,7 +27,7 @@ class DioSettings {
       requestBody: true,
       responseBody: true,
     );
-
+ 
     final QueuedInterceptorsWrapper headerInterceptors =
         QueuedInterceptorsWrapper(
             onRequest:

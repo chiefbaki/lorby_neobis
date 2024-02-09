@@ -4,9 +4,9 @@ import 'package:lorby_neobis/presentation/bloc/email_confirm_bloc/email_confirm_
 import 'package:lorby_neobis/presentation/bloc/login_bloc/login_bloc.dart';
 import 'package:lorby_neobis/presentation/bloc/register_bloc/register_bloc.dart';
 import 'package:lorby_neobis/presentation/router/app_router.dart';
-import 'package:lorby_neobis/provider/btn_activity.dart';
-import 'package:lorby_neobis/provider/pass_visibility.dart';
-import 'package:lorby_neobis/repository/register_repository.dart';
+import 'package:lorby_neobis/presentation/provider/btn_activity.dart';
+import 'package:lorby_neobis/presentation/provider/pass_visibility.dart';
+import 'package:lorby_neobis/domain/repository/register_repository.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {

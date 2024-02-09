@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lorby_neobis/core/consts/app_colors.dart';
-import 'package:lorby_neobis/provider/btn_activity.dart';
+import 'package:lorby_neobis/presentation/provider/btn_activity.dart';
 import 'package:provider/provider.dart';
 
 class PinCodeField extends StatelessWidget {

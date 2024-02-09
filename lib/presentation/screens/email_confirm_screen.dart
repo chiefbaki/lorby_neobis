@@ -9,7 +9,7 @@ import 'package:lorby_neobis/presentation/bloc/email_confirm_bloc/email_confirm_
 import 'package:lorby_neobis/presentation/router/app_router.gr.dart';
 import 'package:lorby_neobis/presentation/widgets/login_btn.dart';
 import 'package:lorby_neobis/presentation/widgets/pin_code.dart';
-import 'package:lorby_neobis/provider/btn_activity.dart';
+import 'package:lorby_neobis/presentation/provider/btn_activity.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
